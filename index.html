@@ -5,10 +5,11 @@
         <div id="search" >
             <form id="myform">
                 <div class="input">
-                    <input type ="search" id ="books">   
+                    <input type ="search" id ="sTerm">   
                 </div>
-                <button>Search Bodoks</button>
+                
             </form>
+            <button onclick = "apiSearch(document.getElementById('sTerm').value)">Search Bodoks</button>
         </div>
         <div id="result">
         </div>
