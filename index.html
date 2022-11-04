@@ -1,22 +1,61 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Book Search</title>
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title> Library </title>  
+<style>   
+body {
+background-image: "library.jpg";
+}  
+button {   
+       background-color: #000000;   
+       width: 55%;  
+        color: rgb(253, 253, 253);   
+        padding: 15px;   
+        margin: 10px 0px;   
+        border: none;   
+        cursor: pointer;   
+         }   
+ input {
+    font-family: Georgia, serif; 
+    background-color: #ffffff;   
+    width: 55%;
+    padding: 15px;   
+    margin: 10px 0px;   
+    border: none;    
+    }   
+    body {
+    background: #ecf3f3;
+}
+
+.particle {
+	position: absolute;
+ 	border-radius: 50%;
+}
+
+</style>
+<center><h1>Search Database For New Reads!</h1></center>
+<link rel="stylesheet" href="index.css">
+</head>    
+<body>    
+    <center> <h2> Library Powered By Google </h2> </center>   
         <div id="search" >
             <form id="myform">
+                <center>
                 <div class="input">
                     <input type ="search" id ="sTerm">   
                 </div>
-                
+            </center>
             </form>
-            <button onclick = "apiSearch(document.getElementById('sTerm').value)">Search Bodoks</button>
+            <center>
+            <button onclick = "apiSearch(document.getElementById('sTerm').value)">Search Books</button>
+            </center>
         </div>
+        <center>
         <div id="result">
+        </center>
         </div>
+
         <script  src="script.js" ></script>
-    </head>
-    <body>
-        
-        
     </body>
 </html>
