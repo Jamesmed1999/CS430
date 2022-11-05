@@ -44,12 +44,13 @@ function getBook(data)
     const heading4=document.createElement("h3");
     const heading5=document.createElement("h4");
     const heading6=document.createElement("h3");
-
-
     const bookimg = document.createElement("img");
-
-
-
+   
+    bookimg.onclick = function() {
+        window.location.href = data.items[i].volumeInfo.canonicalVolumeLink;
+    };
+    bookimg.setAttribute('title',"click for more info");
+    
     bookimg.src = data.items[i].volumeInfo.imageLinks.thumbnail;
     heading.innerHTML = "Title: "+name;
     heading2.innerHTML = "Author: "+ writer;
@@ -58,10 +59,6 @@ function getBook(data)
     heading6.innerHTML="Page Count: "+pageCount;
     heading5.innerHTML="Description: "+description;
 
-    bookimg.onclick = function() {
-        window.location.href = data.items[i].volumeInfo.canonicalVolumeLink;
-    };
-    bookimg.setAttribute('title',"click for more info");
 
     div.appendChild(bookimg);
     div.appendChild(heading);
@@ -79,7 +76,7 @@ function getBook(data)
 function apiSearch(term)
 {
     
-    fetch("https://www.googleapis.com/books/v1/volumes?q=" + term) //replace q with search query 
+    fetch("https://www.googleapis.com/books/v1/volumes?q=" + term)
     .then((response) => {
         if(response.ok)
         {
@@ -90,12 +87,16 @@ function apiSearch(term)
         }
     })
     .then(data => {
-        console.log(data);
-        console.log(data.items[3].volumeInfo.title);
-        console.log(data.items[3].volumeInfo.authors[0]);
         getBook(data)
-        
     })
     .catch((error) => console.error("FETCH ERROR:", error));
-    
 }
+
+//makes it so if enter is pressed it will still run the search
+let input = document.getElementById("myform");
+input.addEventListener("keypress", function(event)
+{
+    if(event.key === "Enter")
+        event.preventDefault();
+    document.getElementById("searchbtn").click();
+});
