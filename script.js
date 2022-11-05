@@ -19,6 +19,7 @@
 function getBook(data)
 {
     const div = document.getElementById("result");
+    
 
     if(div.hasChildNodes())
     {
@@ -36,7 +37,7 @@ function getBook(data)
     const description=data.items[i].volumeInfo.description;
     const pageCount=data.items[i].volumeInfo.pageCount;
 
-
+ 
     const heading = document.createElement("h2");
     const heading2 = document.createElement("h3");
     const heading3=document.createElement("h3");
@@ -57,7 +58,10 @@ function getBook(data)
     heading6.innerHTML="Page Count: "+pageCount;
     heading5.innerHTML="Description: "+description;
 
-
+    bookimg.onclick = function() {
+        window.location.href = data.items[i].volumeInfo.canonicalVolumeLink;
+    };
+    bookimg.setAttribute('title',"click for more info");
 
     div.appendChild(bookimg);
     div.appendChild(heading);
@@ -86,9 +90,9 @@ function apiSearch(term)
         }
     })
     .then(data => {
-        console.log(data.items[3]);
+        console.log(data);
         console.log(data.items[3].volumeInfo.title);
-        console.log(data.items[3].volumeInfo.authors[3]);
+        console.log(data.items[3].volumeInfo.authors[0]);
         getBook(data)
         
     })
