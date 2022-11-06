@@ -1,4 +1,4 @@
-fetch("https://www.googleapis.com/books/v1/volumes?q=a&orderBy=newest") //replace q with search query 
+/* DEFAULT API CALL fetch("https://www.googleapis.com/books/v1/volumes?q=a&orderBy=") //replace q with search query 
 .then((response) => {
     if(response.ok)
     {
@@ -11,20 +11,20 @@ fetch("https://www.googleapis.com/books/v1/volumes?q=a&orderBy=newest") //replac
 .then(data => {
     console.log(data.items[0]);
 })
-.catch((error) => console.error("FETCH ERROR:", error));
+.catch((error) => console.error("FETCH ERROR:", error)); */
 
 function getBook(data)
 {
     const div = document.getElementById("result");
-    
 
+    //deletes old searches if they exist
     if(div.hasChildNodes())
     {
         while (div.firstChild) {
             div.removeChild(div.firstChild);
         }
     }
-
+    //using HTML DOM get data from api and append it to HTML
     for(let i = 0; i < 25; i++)
     {
     const name = data.items[i].volumeInfo.title;
@@ -69,7 +69,7 @@ function getBook(data)
     }
     
 }
-
+//runs the api search with term passed in from the html input field in index.html
 function apiSearch(term)
 {
     
