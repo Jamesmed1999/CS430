@@ -1,50 +1,34 @@
-const mongoose = require('mongoose');
-const express = require('express');
+const express=require('express');
 const app = express();
+const mongoose=require("mongoose");
+const bodyParser= require("body-parser");
 
+app.use(bodyParser.urlencoded({extended: true}));
+mongoose.connect("mongodb+srv://430lab:vpcK0xIQNPuyypn4@430-midterm-db.dsbzrna.mongodb.net/test", {useNewUrlParser: true}, {useUnifiedTopology: true})
 
-const uri = "mongodb+srv://430lab:vpcK0xIQNPuyypn4@430-midterm-db.dsbzrna.mongodb.net/test";
-
-//function to connect to mongoDB, will catch an error if it fails and log it out 
-async function connect_to_db() {
-    try {
-        await mongoose.connect(uri);
-        console.log("Connected to MongoDB");
-    } catch (error) {console.error(error)}
+//create a database schema
+const testSchema={
+username: String,
+password: String
 }
 
-//call the function to connect to mongoDB
-connect_to_db();
+const Test= mongoose.model("Test", testSchema);
 
-//import the schema table template from userInfo.js
-require("./userInfo");
-const user = mongoose.model("User");
+app.get("/", function(req, res){
+    res.sendFile(__dirname+"/login.html");
+})
+
+//app.post
+app.post("/", function(req,res){
+    let newTest= new Test({
+        username: req.body.username,
+        password: req.body.password
+    });
+    newTest.save();
+    //return res.redirect(__dirname+"index.html")
+})
 
 
-//API to request and receive user info
-app.post("/signup",async(req,res)=> {
-    const {username, email, password} = req.body;
-    try {
-        //Check to see if there is already a user registered under this email 
-        const duplicateUser = user.findOne({email});
-        if (duplicateUser) {
-            res.send({
-                error: "Email already taken"
-            });
-        }
-
-        await user.create({
-            username,
-            email,
-            password,
-        });
-        res.send({status:"success"});
-
-    } catch (error) {
-        res.send({status:"error"});
-    }
-});
-
-//log out that we have started our server
-app.listen(8000, () => {console.log("Server started on port 8000")});
-
+app.listen(3000, function(){
+    console.log("server is running on 3000");
+})
