@@ -12,29 +12,31 @@
   </div>
 
 
-<center><h1>Search Database For New Reads!</h1></center>
+
 <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-  
-    <center> <h2> Library Powered By Google </h2> </center>   
-        <div id="search" >
+    <div class="hero">
+      <center><h1 class = "herotxt">Search Database For New Reads!</h1></center>
+    <center> <h2 class = herotxt> Library Powered By Google </h2> </center>   
+        <div id="search">
             <form id="myform">
                 <center>
                 <div class="input">
                     <input type ="search" id ="sTerm">   
                 </div>
             </center>
+          </div>
             </form>
             <center>
-            <button onclick = "apiSearch(document.getElementById('sTerm').value)">Search Books</button>
+            <button id = "searchbtn" onclick = "apiSearch(document.getElementById('sTerm').value)">Search Books</button>
             </center>
         </div>
         <center>
         <div class="card">
        
-        <div id="result">
+        <div id="result" class="res">
            
         </div>
     
@@ -97,7 +99,28 @@
   margin: auto;
   text-align: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  
 }
 
-
+.hero{
+  background-image:  url("libhero.png");
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  color: white;
+  
+}
+.herotxt
+{
+  -webkit-text-stroke: .5px #000000;
+}
+.res
+{
+  margin-top: 20px;
+}
+img{
+  margin-top: 10px;
+}
 </style>
