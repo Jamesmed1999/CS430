@@ -25,6 +25,14 @@ const user = mongoose.model("User");
 app.post("/signup",async(req,res)=> {
     const {username, email, password} = req.body;
     try {
+        //Check to see if there is already a user registered under this email 
+        const duplicateUser = user.findOne({email});
+        if (duplicateUser) {
+            res.send({
+                error: "Email already taken"
+            });
+        }
+
         await user.create({
             username,
             email,
