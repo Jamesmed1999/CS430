@@ -1,4 +1,4 @@
-/*fetch("https://www.googleapis.com/books/v1/volumes?q=Hamlet") //replace q with search query 
+fetch("https://www.googleapis.com/books/v1/volumes?q=a&orderBy=newest") //replace q with search query 
 .then((response) => {
     if(response.ok)
     {
@@ -10,12 +10,9 @@
 })
 .then(data => {
     console.log(data.items[0]);
-    console.log(data.items[0].volumeInfo.title);
-    console.log(data.items[0].volumeInfo.authors[0]);
-    getBook(data)
 })
 .catch((error) => console.error("FETCH ERROR:", error));
-*/
+
 function getBook(data)
 {
     const div = document.getElementById("result");
@@ -49,7 +46,7 @@ function getBook(data)
     bookimg.onclick = function() {
         window.location.href = data.items[i].volumeInfo.canonicalVolumeLink;
     };
-    bookimg.setAttribute('title',"click for more info");
+    bookimg.setAttribute('title',"click for more info"); //very cool
     
     bookimg.src = data.items[i].volumeInfo.imageLinks.thumbnail;
     heading.innerHTML = "Title: "+name;
