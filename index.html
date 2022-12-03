@@ -2,119 +2,61 @@
 <html>   
 <head>  
 <meta name="viewport" content="width=device-width, initial-scale=1">  
-<title> Library </title>
-
-<div class="topnav">
-    <a class="active" href="#home"></a>
-    <a href="#help">Get Help</a>
-    <a href="#request">Request A Book</a>
-    <a href="#logout">Sign Out</a>
-  </div>
-</head>
-
-<body>
-    <div class="hero">
-      <center><h1 class = "herotxt">Search Database For New Reads!</h1></center>
-    <center> <h2 class = herotxt> Library Powered By Google </h2> </center>   
-        <div id="search">
-            <form id="myform">
-                <center>
-                <div class="input">
-                    <input type ="search" id ="sTerm">   
-                </div>
-            </center>
-          </div>
-            </form>
-            <center>
-            <button id = "searchbtn" onclick = "apiSearch(document.getElementById('sTerm').value)">Search Books</button>
-            </center>
-        </div>
-        <center>
-        <div class="card">
-       
-        <div id="result" class="res">
-           
-        </div>
-        </center>
-        </div>
-        <script  src="script.js" ></script>
-    </body>
-</html>
+<title> Library </title>  
 <style>   
-    body {
-    background-image: "library.jpg";
-    }  
-    button {   
-           background-color: #000000;   
-           width: 55%;  
-            color: rgb(253, 253, 253);   
-            padding: 15px;   
-            margin: 10px 0px;   
-            border: none;   
-            cursor: pointer;   
-             }   
-     input {
-        font-family: Georgia, serif; 
-        background-color: #ffffff;   
-        width: 55%;
+Body {  
+    font-family: Georgia, serif;  
+  background-color: rgb(169, 223, 233);  
+}  
+button {   
+       background-color: #000000;   
+       width: 100%;  
+        color: rgb(255, 255, 255);   
         padding: 15px;   
         margin: 10px 0px;   
-        border: none;    
-        }   
-        body {
-        background: #ecf3f3;
-    }
-    .topnav{
-        font-family: Georgia, serif; 
-        background-color: rgb(95, 179, 190);
-        overflow: hidden;       
-    }
-    .topnav a {
-      float: left;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-    }
-    .topnav a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-    .topnav a.active {
-      background-color: rgb(95, 179, 190);
-      color: rgb(95, 179, 190);
-    }
-
-    .card {
-  background-color: #add4d6;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  
-}
-
-.hero{
-  background-image:  url("libhero.png");
-  height: 300px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  color: white;
-  
-}
-.herotxt
-{
-  -webkit-text-stroke: .5px #000000;
-}
-.res
-{
-  margin-top: 20px;
-}
-img{
-  margin-top: 10px;
-}
+        border: none;   
+        cursor: pointer;   
+         }   
+ form {   
+        border: 3px solid #3887ee;   
+    }   
+ input[type=text], input[type=password] {   
+        width: 100%;   
+        margin: 8px 0;  
+        padding: 12px 20px;   
+        display: inline-block;   
+        border: 2px solid rgb(0, 0, 0);   
+        box-sizing: border-box;   
+    }  
+ button:hover {   
+        opacity: 0.7;   
+    }   
+  .cancelbtn {   
+        width: auto;   
+        padding: 10px 18px;  
+        margin: 10px 5px;  
+    }   
+        
+     
+ .container {   
+        padding: 25px;   
+        background-color: rgb(255, 255, 255);  
+    }   
 </style>
+<center><h1>Welcome to E-Library!</h1></center>
+</head>    
+<body>    
+    <center> <h1> Sign In To Browse </h1> </center>   
+    <form action="lib.html">  
+        <div class="container">   
+            <label>Username : </label>   
+            <input type="text" placeholder="Enter Username" name="username" required>  
+            <label>Password : </label>   
+            <input type="password" placeholder="Enter Password" name="password" required>  
+            <button type="submit">Login</button>   
+            <input type="checkbox" checked="checked"> Remember me   
+            <a href="#"> Forgot password? </a>   
+        </div>   
+    </form>     
+</body>     
+</html> 

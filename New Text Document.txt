@@ -1,0 +1,17 @@
+
+
+let arry = [[1,2,3,4],[1,2,2,3]];
+let arr2 = [1,2,3,2,3];
+
+function printArr(arr)
+{
+  arr.forEach(element => console.log(element));
+}
+
+printArr(arry);
+
+
+console.log(arry.length)
+console.log(arry[1].includes(2) + " " + arry[1].indexOf(2))
+//console.log(arr2.reverse())
+
