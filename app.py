@@ -7,7 +7,9 @@ app = Flask(__name__, static_folder="")
 
 @app.route('/')
 def my_html():
-    return render_template('login.html', predicted=0)
+    #We dont have the login html file YET, so commented out
+    #return render_template('login.html', predicted=0)
+    return "Hello, world!"
 
 
 # This post is called by the login.html once a user submits their login
@@ -23,6 +25,9 @@ def login_post():
         # send the user to the library index.html page
         return render_template('index.html')
 
-
+@app.route('/inventory')
+def inventory():
+    return render_template('inventory.html', predicted=0)
+    
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5000, threaded=True)
