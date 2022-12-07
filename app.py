@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 
 app = Flask(__name__, static_folder="")
 
@@ -27,7 +27,7 @@ def login_post():
 
 @app.route('/inventory')
 def inventory():
-    return render_template('inventory.html', predicted=0)
-    
+    return render_template('inventory.html')
+
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5000, threaded=True)
