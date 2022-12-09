@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder="")
 
 @app.route('/')
 def my_html():
-    return render_template('login.html', predicted=0)
+    return render_template('index.html', predicted=0)
 
 
 # This post is called by the login.html once a user submits their login
@@ -21,7 +21,7 @@ def login_post():
         # (TO DO) check if the login exists, if not, save to database
 
         # send the user to the library index.html page
-        return render_template('index.html')
+        return render_template('lib.html')
 
 
 if __name__ == "__main__":
