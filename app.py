@@ -9,6 +9,7 @@ app = Flask(__name__, static_folder="")
 def my_html():
     #We dont have the login html file YET, so commented out
     #return render_template('login.html', predicted=0)
+    return("hello world")
 
 
 # This post is called by the login.html once a user submits their login
