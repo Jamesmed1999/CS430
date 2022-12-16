@@ -19,7 +19,7 @@
     </div>
     <div align=center>
         <div className="Sign-Up-Container">
-            <form className="row g-3">
+            <form className="row g-3" action="{{ url_for('signup_post') }}" method="post">
                 <div className="Sign-Up-Form">
                     <div className="name-form">
                         <div className="col-md-4">
@@ -45,26 +45,26 @@
                     <div className="p-2 flex-fill">
 
                         <div className="input-group">
-                            <label for="validationDefaultUsername" className="form-label"></label>
+                            <label for="username" className="form-label"></label>
                             <input type="text" className="form-control" placeholder='Username'
-                                id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
+                                name="username" id="username" aria-describedby="inputGroupPrepend2" required />
                         </div>
                     </div>
                     <div className="col-md-3">
-                        <label for="validationDefault03" className="form-label"></label>
-                        <input type="password" className="form-control" id="validationDefault03" placeholder="Password" required />
+                        <label for="password" className="form-label"></label>
+                        <input type="password" className="form-control" name="password" id="password" placeholder="Password" required />
                     </div>
                     <div className="col-md-3">
-                        <label for="validationDefault03" className="form-label"></label>
-                        <input type="password" className="form-control" placeholder="Confirm Password" id="validationDefault03" required />
+                        <label for="password" className="form-label"></label>
+                        <input type="password" className="form-control" placeholder="Confirm Password" name = "password" id="password" required />
+                    </div>
+                </div>
+                <div class="button">
+                    <div className="Submit">
+                        <button class="btn" type="submit" style="text-decoration: none; color: whitesmoke;" role="button">Submit</button>
                     </div>
                 </div>
             </form>
-        </div>
-        <div class="button">
-            <div className="Submit">
-                <a class="btn" style="text-decoration: none; color: whitesmoke;" href="./inventory.html" role="button">Submit</a>
-            </div>
         </div>
      </div>
 </body>

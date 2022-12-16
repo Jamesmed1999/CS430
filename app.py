@@ -39,12 +39,11 @@ def lib_post():
 
         # check if the login exists, if not, create a new user
         if not bool(User.query.filter_by(username=_username).first()):
-            new_user = User(username=_username, password=_password)
-            db.session.add(new_user)
-            db.session.commit()
+            return render_template('signup.html')
+        else:
+            # send the user to the library index.html page
+            return render_template('lib.html')
 
-        # send the user to the library index.html page
-        return render_template('lib.html')
 
 # This post is called by the inventory page to get back to lib.html
 
@@ -58,6 +57,21 @@ def search_post():
 @app.route('/inventory')
 def inv_post():
     return render_template('inventory.html')
+
+# This post swaps to the sign in page if you do not already have an account
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup_post():
+    if request.method == "POST":
+        _username = request.form.get("username")
+        _password = request.form.get("password")
+
+        new_user = User(username=_username, password=_password, book="")
+        db.session.add(new_user)
+        db.session.commit()
+
+        return render_template('lib.html')
 
 
 if __name__ == "__main__":
