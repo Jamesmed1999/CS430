@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Account </title>
+    <div align=center>
+
+        <head>
+            <h1> Create an Account! </h1>
+        </head>
+    </div>
+    <style>
+    </style>
+
+<body>
+    <div class="img">
+        <img src="./images/signup.jpg" alt="library" width="100%" height="100%">
+    </div>
+    <div align=center>
+        <div className="Sign-Up-Container">
+            <form className="row g-3">
+                <div className="Sign-Up-Form">
+                    <div className="name-form">
+                        <div className="col-md-4">
+                            <label for="validationDefault01" className="form-label"></label>
+                            <input type="text" className="form-control" placeholder="First Name" id="validationDefault01"
+                                required />
+                        </div>
+                        <div className="col-md-4">
+                            <label for="validationDefault02" className="form-label"></label>
+                            <input type="text" className="form-control" placeholder="Last Name" id="validationDefault02"
+                                required />
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div class="Date-of-Birth">
+                            <div className='Date-of-Birth'>
+                                <label for="validationDefaultUsername" className="form-label"></label>
+                                <input type="text" className="form-control dob-item" placeholder='D.O.B: MM/DD/Year'
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-2 flex-fill">
+
+                        <div className="input-group">
+                            <label for="validationDefaultUsername" className="form-label"></label>
+                            <input type="text" className="form-control" placeholder='Username'
+                                id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <label for="validationDefault03" className="form-label"></label>
+                        <input type="password" className="form-control" id="validationDefault03" placeholder="Password" required />
+                    </div>
+                    <div className="col-md-3">
+                        <label for="validationDefault03" className="form-label"></label>
+                        <input type="password" className="form-control" placeholder="Confirm Password" id="validationDefault03" required />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="button">
+            <div className="Submit">
+                <a class="btn" style="text-decoration: none; color: whitesmoke;" href="./inventory.html" role="button">Submit</a>
+            </div>
+        </div>
+     </div>
+</body>
+
+<style>
+    .button {
+        background-color: #555555;
+        border-radius: 4px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }  
+
+    input {
+        font-family: Georgia, serif;
+        background-color: #ffffff;
+        width: 55%;
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+    }
+
+    body {
+        background: #ecf3f3;
+        color: whitesmoke;
+    }
+
+    img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 112%;
+        z-index: -1;
+    }
+</style>
+
+</html>
