@@ -55,6 +55,7 @@ if __name__ == "__main__":
 class User(db.Model):
     username = db.Column(db.String(100), nullable=False, primary_key=True)
     password = db.Column(db.String(80), nullable=False)
+    book = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
         return f'<User {self.username}>'
