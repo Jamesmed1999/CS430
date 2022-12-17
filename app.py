@@ -8,6 +8,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_folder="")
 
+global current_username
+
 '''
 SQLALCHEMY_DATABASE_URI: The database URI to specify the database you want to establish a connection with. 
 In this case, the URI follows the format sqlite:///path/to/database.db. 
@@ -34,8 +36,10 @@ def signin_post():
 def lib_post():
     # When our login form is submitted, save the login info, save to our database, and then send user to the index.html file
     if request.method == "POST":
+        global current_username
         _username = request.form.get("username")
         _password = request.form.get("password")
+        current_username = _username
 
         # check if the login exists, if not, create a new user
         if not bool(User.query.filter_by(username=_username).first()):
@@ -64,14 +68,46 @@ def inv_post():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup_post():
     if request.method == "POST":
+        global current_username
         _username = request.form.get("username")
         _password = request.form.get("password")
+        current_username = _username
 
         new_user = User(username=_username, password=_password, book="")
         db.session.add(new_user)
         db.session.commit()
 
         return render_template('lib.html')
+
+
+@app.route('/reserved', methods=['GET', 'POST'])
+def reservebook_post():
+    if request.method == "POST":
+        global current_username
+        cur_user = User.query.filter_by(username=current_username).first()
+        cur_user.book = "Rocky(test)"
+        db.session.commit()
+
+        return render_template('inventory.html')
+
+
+@app.route('/returned', methods=['GET', 'POST'])
+def returnbook_post():
+    if request.method == "POST":
+        global current_username
+        cur_user = User.query.filter_by(username=current_username).first()
+        cur_user.book = ""
+        db.session.commit()
+
+        return render_template('inventory.html')
+
+
+# This post dynamically prints the current user's info to userinfo.html
+@app.route('/info')
+def info_post():
+    global current_username
+    cur_user = User.query.filter_by(username=current_username).first()
+    return render_template('userinfo.html', cur_user=cur_user)
 
 
 if __name__ == "__main__":

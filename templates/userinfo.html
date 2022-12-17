@@ -13,36 +13,19 @@
   </div>
 </head>
 
-<body>
-    <div class="hero">
+{% block content %}
+    <span class="title">
+        <h1>{% block title %} Username: {{ cur_user.username }}{% endblock %}</h1>
+    </span>
+    <div class="content">
+            <div class="user">
+                <p>Password: {{ cur_user.password }}</p>
+                <p>Reserved: {{ cur_user.book }}</p>
+                <p>Thank you for using our Library App!</p>
+            </div>
+    </div>
+{% endblock %}
 
-      <center><h1 class = "herotxt">Browse the Library</h1></center>
-
-    <center> <h2 class = herotxt> Library Powered By Google </h2> </center>   
-        <div id="search">
-            <form id="myform">
-                <center>
-                <div class="input">
-                    <input type ="search" id ="sTerm">   
-                </div>
-            </center>
-          </div>
-            </form>
-            <center>
-            <button id = "searchbtn" onclick = "apiSearch(document.getElementById('sTerm').value)">Search Books</button>
-            </center>
-        </div>
-        <center>
-        <div class="card">
-       
-        <div id="result" class="res">
-           
-        </div>
-        </center>
-        </div>
-        <script  src="script.js" ></script>
-    </body>
-</html>
 <style>   
     body {
     background-image: "library.jpg";

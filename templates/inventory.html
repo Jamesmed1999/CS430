@@ -9,15 +9,24 @@
     <a href="#help">Get Help</a>
     <a class="nav-link" href="{{ url_for('search_post')}}">Search</a>
     <a class="nav-link" href="{{ url_for('signin_post')}}">Sign Out</a>
+    <a class="nav-link" href="{{ url_for('info_post')}}">Account Info</a>
   </div>
 </head>
 
 <body>
     <div class="hero">
       <center><h1 class = "herotxt">Browse the Inventory</h1></center>
-      </div>
+    </div>
       <div id="container" class="res"> <script> table();</script></div>
-    </body>
+
+      <form action="{{ url_for('reservebook_post')}}" method="post">  
+            <button type="submit">Reserve</button> 
+      </form>   
+      <form action="{{ url_for('returnbook_post')}}" method="post">  
+        <button type="submit">Return</button> 
+  </form>   
+
+</body>
 </html>
 <style>   
     body {
