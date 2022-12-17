@@ -8,11 +8,13 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_folder="")
 
-'''
-SQLALCHEMY_DATABASE_URI: The database URI to specify the database you want to establish a connection with. 
-In this case, the URI follows the format sqlite:///path/to/database.db. 
+global current_username
 
-You use the os.path.join() function to intelligently join the base directory you constructed and stored in the basedir variable, and the database.db file name. 
+'''
+SQLALCHEMY_DATABASE_URI: The database URI to specify the database you want to establish a connection with.
+In this case, the URI follows the format sqlite:///path/to/database.db.
+
+You use the os.path.join() function to intelligently join the base directory you constructed and stored in the basedir variable, and the database.db file name.
 This will connect to a database.db database file in your flask_app directory. The file will be created once you initiate the database.
 SQLALCHEMY_TRACK_MODIFICATIONS: A configuration to enable or disable tracking modifications of objects. You set it to False to disable tracking and use less memory. For more, see the configuration page in the Flask-SQLAlchemy documentation.
 '''
@@ -34,8 +36,10 @@ def signin_post():
 def lib_post():
     # When our login form is submitted, save the login info, save to our database, and then send user to the index.html file
     if request.method == "POST":
+        global current_username
         _username = request.form.get("username")
         _password = request.form.get("password")
+        current_username = _username
 
         # check if the login exists, if not, create a new user
         if not bool(User.query.filter_by(username=_username).first()):
@@ -56,7 +60,8 @@ def search_post():
 # This post swaps to the inventory page in the navbar
 @app.route('/inventory')
 def inv_post():
-    return render_template('inventory.html')
+    books = ReserveBook.query
+    return render_template('inventory.html', books=books)
 
 # This post swaps to the sign in page if you do not already have an account
 
@@ -64,14 +69,62 @@ def inv_post():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup_post():
     if request.method == "POST":
+        global current_username
         _username = request.form.get("username")
         _password = request.form.get("password")
+        current_username = _username
 
         new_user = User(username=_username, password=_password, book="")
         db.session.add(new_user)
         db.session.commit()
 
         return render_template('lib.html')
+
+
+@app.route('/reserved', methods=['GET', 'POST'])
+def reservebook_post():
+    if request.method == "POST":
+        _title = request.form.get("title")
+        if ReserveBook.query.filter_by(bookTitle=_title).first().booksAvailable == 1:
+            global current_username
+            cur_user = User.query.filter_by(username=current_username).first()
+            cur_user.book = _title
+            db.session.commit()
+
+            cur_book = ReserveBook.query.filter_by(bookTitle=_title).first()
+            cur_book.booksAvailable = 0
+            db.session.commit()
+
+            books = ReserveBook.query
+            return render_template('inventory.html', books=books)
+        else:
+            books = ReserveBook.query
+            return render_template('inventory.html', books=books)
+
+
+@app.route('/returned', methods=['GET', 'POST'])
+def returnbook_post():
+    if request.method == "POST":
+        global current_username
+        cur_user = User.query.filter_by(username=current_username).first()
+        _title = request.form.get("title")
+        cur_user.book = ""
+        db.session.commit()
+
+        cur_book = ReserveBook.query.filter_by(bookTitle=_title).first()
+        cur_book.booksAvailable = 1
+        db.session.commit()
+
+        books = ReserveBook.query
+        return render_template('inventory.html', books=books)
+
+
+# This post dynamically prints the current user's info to userinfo.html
+@app.route('/info')
+def info_post():
+    global current_username
+    cur_user = User.query.filter_by(username=current_username).first()
+    return render_template('userinfo.html', cur_user=cur_user)
 
 
 if __name__ == "__main__":

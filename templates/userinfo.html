@@ -3,87 +3,30 @@
 <head>  
 <meta name="viewport" content="width=device-width, initial-scale=1">  
 <title> Library </title>
-<script  src="invscript.js" ></script>
+
 <div class="topnav">
     <a class="active" href="#home"></a>
     <a href="#help">Get Help</a>
-    <a class="nav-link" href="{{ url_for('search_post')}}">Search</a>
+    <a class="nav-link" href="{{ url_for('inv_post')}}" >Request A Book</a>
     <a class="nav-link" href="{{ url_for('signin_post')}}">Sign Out</a>
     <a class="nav-link" href="{{ url_for('info_post')}}">Account Info</a>
   </div>
 </head>
 
-<body>
-    <div class="hero">
-      <center><h1 class = "herotxt">Browse the Inventory</h1></center>
+{% block content %}
+    <span class="title">
+        <h1>{% block title %} Username: {{ cur_user.username }}{% endblock %}</h1>
+    </span>
+    <div class="content">
+            <div class="user">
+                <p>Password: {{ cur_user.password }}</p>
+                <p>Reserved: {{ cur_user.book }}</p>
+                <p>Thank you for using our Library App!</p>
+            </div>
     </div>
+{% endblock %}
 
-    {% block content %}
-      <table id="data" class="table table-striped">
-        <thead>
-          <tr>
-            <th>ISBN</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Reserved</th>
-            <th>publisher</th>
-            <th>release date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for book in books %}
-            <tr>
-              <td>{{ book.bookTitle }}</td>
-              <td>{{ book.ISBN }}</td>
-              <td>{{ book.bookAuthor }}</td>
-              <td>{{ book.booksAvailable }}</td>
-              <td>{{ book.publisher }}</td>
-              <td>{{ book.releaseDate }}</td>
-              <td><form action="{{ url_for('reservebook_post')}}" method="POST"><button
-                name="title" type="submit"
-                value="{{book.bookTitle}}">Reserve</button></form></td>
-              <td><form action="{{ url_for('returnbook_post')}}" method="POST"><button
-                name="title" type="submit"
-                value="{{book.bookTitle}}">Return</button></form></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% endblock %}
-</body>
-</html>
 <style>   
-data {
-    width: 50%;
-    font-size: 15px;
-}
-
-td {
-    width: 50%;
-    border: 1px solid black;
-    text-align: justify;
-}
-
-    td::after {
-        content: "";
-        display: inline-block;
-        width: 100%;
-    }
-
-span.left {
-    float: left;
-}
-
-span.right {
-    float: right;
-}
-  span.left {
-      float: left;
-  }
-
-  span.right {
-      float: right;
-  }
     body {
     background-image: "library.jpg";
     }  
@@ -140,7 +83,7 @@ span.right {
 }
 
 .hero{
-  background-image: url("libhero.png");
+  background-image:  url("libhero.png");
   height: 300px;
   background-position: center;
   background-repeat: no-repeat;
@@ -160,11 +103,5 @@ span.right {
 img{
   margin-top: 10px;
 }
-table, th, td {
-  border:1px solid black;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-  text-align: center;
-}
+
 </style>
