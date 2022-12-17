@@ -17,18 +17,73 @@
     <div class="hero">
       <center><h1 class = "herotxt">Browse the Inventory</h1></center>
     </div>
-      <div id="container" class="res"> <script> table();</script></div>
 
-      <form action="{{ url_for('reservebook_post')}}" method="post">  
-            <button type="submit">Reserve</button> 
-      </form>   
-      <form action="{{ url_for('returnbook_post')}}" method="post">  
-        <button type="submit">Return</button> 
-  </form>   
-
+    {% block content %}
+      <table id="data" class="table table-striped">
+        <thead>
+          <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Reserved</th>
+            <th>publisher</th>
+            <th>release date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+            <tr>
+              <td>{{ book.bookTitle }}</td>
+              <td>{{ book.ISBN }}</td>
+              <td>{{ book.bookAuthor }}</td>
+              <td>{{ book.booksAvailable }}</td>
+              <td>{{ book.publisher }}</td>
+              <td>{{ book.releaseDate }}</td>
+              <td><form action="{{ url_for('reservebook_post')}}" method="POST"><button
+                name="title" type="submit"
+                value="{{book.bookTitle}}">Reserve</button></form></td>
+              <td><form action="{{ url_for('returnbook_post')}}" method="POST"><button
+                name="title" type="submit"
+                value="{{book.bookTitle}}">Return</button></form></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endblock %}
 </body>
 </html>
 <style>   
+data {
+    width: 50%;
+    font-size: 15px;
+}
+
+td {
+    width: 50%;
+    border: 1px solid black;
+    text-align: justify;
+}
+
+    td::after {
+        content: "";
+        display: inline-block;
+        width: 100%;
+    }
+
+span.left {
+    float: left;
+}
+
+span.right {
+    float: right;
+}
+  span.left {
+      float: left;
+  }
+
+  span.right {
+      float: right;
+  }
     body {
     background-image: "library.jpg";
     }  

@@ -11,10 +11,10 @@ app = Flask(__name__, static_folder="")
 global current_username
 
 '''
-SQLALCHEMY_DATABASE_URI: The database URI to specify the database you want to establish a connection with. 
-In this case, the URI follows the format sqlite:///path/to/database.db. 
+SQLALCHEMY_DATABASE_URI: The database URI to specify the database you want to establish a connection with.
+In this case, the URI follows the format sqlite:///path/to/database.db.
 
-You use the os.path.join() function to intelligently join the base directory you constructed and stored in the basedir variable, and the database.db file name. 
+You use the os.path.join() function to intelligently join the base directory you constructed and stored in the basedir variable, and the database.db file name.
 This will connect to a database.db database file in your flask_app directory. The file will be created once you initiate the database.
 SQLALCHEMY_TRACK_MODIFICATIONS: A configuration to enable or disable tracking modifications of objects. You set it to False to disable tracking and use less memory. For more, see the configuration page in the Flask-SQLAlchemy documentation.
 '''
@@ -60,7 +60,8 @@ def search_post():
 # This post swaps to the inventory page in the navbar
 @app.route('/inventory')
 def inv_post():
-    return render_template('inventory.html')
+    books = ReserveBook.query
+    return render_template('inventory.html', books=books)
 
 # This post swaps to the sign in page if you do not already have an account
 
@@ -83,12 +84,22 @@ def signup_post():
 @app.route('/reserved', methods=['GET', 'POST'])
 def reservebook_post():
     if request.method == "POST":
-        global current_username
-        cur_user = User.query.filter_by(username=current_username).first()
-        cur_user.book = "Rocky(test)"
-        db.session.commit()
+        _title = request.form.get("title")
+        if ReserveBook.query.filter_by(bookTitle=_title).first().booksAvailable == 1:
+            global current_username
+            cur_user = User.query.filter_by(username=current_username).first()
+            cur_user.book = _title
+            db.session.commit()
 
-        return render_template('inventory.html')
+            cur_book = ReserveBook.query.filter_by(bookTitle=_title).first()
+            cur_book.booksAvailable = 0
+            db.session.commit()
+
+            books = ReserveBook.query
+            return render_template('inventory.html', books=books)
+        else:
+            books = ReserveBook.query
+            return render_template('inventory.html', books=books)
 
 
 @app.route('/returned', methods=['GET', 'POST'])
@@ -96,10 +107,16 @@ def returnbook_post():
     if request.method == "POST":
         global current_username
         cur_user = User.query.filter_by(username=current_username).first()
+        _title = request.form.get("title")
         cur_user.book = ""
         db.session.commit()
 
-        return render_template('inventory.html')
+        cur_book = ReserveBook.query.filter_by(bookTitle=_title).first()
+        cur_book.booksAvailable = 1
+        db.session.commit()
+
+        books = ReserveBook.query
+        return render_template('inventory.html', books=books)
 
 
 # This post dynamically prints the current user's info to userinfo.html
