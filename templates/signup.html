@@ -18,22 +18,23 @@
         <img src="./images/signup.jpg" alt="library" width="100%" height="100%">
     </div>
     <div align=center>
-        <div className="Sign-Up-Container">
-            <form className="row g-3" action="{{ url_for('signup_post') }}" method="post">
-                <div className="Sign-Up-Form">
+        <div className="Sign-Up-Container" class="Sign-Up-Container">
+            <ul class="flex-outer">
+            <form className="row g-3" class="frm1" action="{{ url_for('signup_post') }}" method="post">
+                <div className="Sign-Up-Form"class="Sign-Up-Form">
                     <div className="name-form">
-                        <div className="col-md-4">
+                        <div className="col-md-4" class="input-box">
                             <label for="validationDefault01" className="form-label"></label>
                             <input type="text" className="form-control" placeholder="First Name" id="validationDefault01"
                                 required />
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-4"class="input-box">
                             <label for="validationDefault02" className="form-label"></label>
                             <input type="text" className="form-control" placeholder="Last Name" id="validationDefault02"
                                 required />
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3"class="input-box">
                         <div class="Date-of-Birth">
                             <div className='Date-of-Birth'>
                                 <label for="validationDefaultUsername" className="form-label"></label>
@@ -42,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div className="p-2 flex-fill">
+                    <div className="p-2 flex-fill"class="input-box">
 
                         <div className="input-group">
                             <label for="username" className="form-label"></label>
@@ -50,48 +51,58 @@
                                 name="username" id="username" aria-describedby="inputGroupPrepend2" required />
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3"class="input-box">
                         <label for="password" className="form-label"></label>
                         <input type="password" className="form-control" name="password" id="password" placeholder="Password" required />
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3"class="input-box">
                         <label for="password" className="form-label"></label>
                         <input type="password" className="form-control" placeholder="Confirm Password" name = "password" id="password" required />
                     </div>
                 </div>
                 <div class="button">
                     <div className="Submit">
-                        <button class="btn" type="submit" style="text-decoration: none; color: whitesmoke;" role="button">Submit</button>
+                        <button class="btn" type="submit"  role="button">Submit</button>
                     </div>
                 </div>
             </form>
+            </ul>
         </div>
      </div>
 </body>
 
 <style>
-    .button {
-        background-color: #555555;
-        border-radius: 4px;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }  
+button {   
+           background-color: #000000;   
+           width: 45%;  
+            color: rgb(253, 253, 253);   
+            padding: 15px;   
+            margin: 10px 0px;   
+            border: none;   
+            cursor: pointer;   
+            opacity: 0.9;
+             }
+ .btn:hover{
+                opacity: 2;
+                background-color: #2c2c2c;  
+             }    
 
     input {
         font-family: Georgia, serif;
         background-color: #ffffff;
-        width: 55%;
+        width: 95%;
         padding: 15px;
         margin: 10px 0px;
-        border: none;
+        border-style: solid;
+        border-width: 2px;
+        display: flex;
+        flex-wrap: wrap;
+        overflow-wrap: break-word;
+        justify-content: space-between;
     }
 
     body {
-        background: #ecf3f3;
+        background: #000000;
         color: whitesmoke;
     }
 
@@ -105,7 +116,25 @@
         width: 100%;
         height: 112%;
         z-index: -1;
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
     }
+.Sign-Up-Container
+{
+    max-width: 1200px;
+    width:100%;
+    background-color: #ffffff;
+
+    padding:25px 30px;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 5px 5px 20px 5px rgb(0, 0, 0);
+    
+    
+    
+}
+
+
 </style>
 
 </html>
