@@ -1,13 +1,13 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
-
+# from flask_login import UserMixin, login_user, LoginManager, login_required, current_user
 from sqlalchemy.sql import func
-
+from flask_bcrypt import Bcrypt
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_folder="")
-
+bcrypt = Bcrypt(app)
 global current_username
 
 '''
@@ -21,10 +21,18 @@ SQLALCHEMY_TRACK_MODIFICATIONS: A configuration to enable or disable tracking mo
 app.config['SQLALCHEMY_DATABASE_URI'] =\
     'sqlite:///' + os.path.join(basedir, 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+#Secret key used for seession cookies, default password for now, make more secure if needed
+app.config['SECRET_KEY'] = 'secretkey'
 db = SQLAlchemy(app)
 
+#Login
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+# login_manager.login_view = "login"
 
+# @login_manager.user_loader
+# def load_user(username):
+#     return User.query.get(str(username))
 # By default, the flask app will load the index.html file in our /templates folder
 @app.route('/')
 def signin_post():
@@ -42,11 +50,17 @@ def lib_post():
         current_username = _username
 
         # check if the login exists, if not, create a new user
-        if not bool(User.query.filter_by(username=_username).first()):
+        user = User.query.filter_by(username=_username).first()
+        if not user:
             return render_template('signup.html')
         else:
-            # send the user to the library index.html page
-            return render_template('lib.html')
+            #Compare hashed password to input
+            if bcrypt.check_password_hash(user.password, _password):
+                # send the user to the library index.html page
+                return render_template('lib.html')
+            else:
+                return render_template('index.html')
+
 
 
 # This post is called by the inventory page to get back to lib.html
@@ -71,7 +85,8 @@ def signup_post():
     if request.method == "POST":
         global current_username
         _username = request.form.get("username")
-        _password = request.form.get("password")
+        #Save password after hashing to encrypt
+        _password = bcrypt.generate_password_hash(request.form.get("password"))
         current_username = _username
 
         new_user = User(username=_username, password=_password, book="")
@@ -145,6 +160,7 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
+
 
 # The User table for our database
 
