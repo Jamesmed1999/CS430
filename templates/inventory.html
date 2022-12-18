@@ -8,7 +8,7 @@
     <a class="active" href="#home"></a>
     <a class="nav-link" href="{{ url_for('search_post')}}">Search</a>
     <a class="nav-link" href="{{ url_for('quote_post')}}">Quote Look Up</a>
-    <a class="nav-link" href="{{ url_for('inv_post')}}" >Request A Book</a>
+    <a class="nav-link" href="{{ url_for('inv_post')}}" >Book Inventory</a>
     <a class="nav-link" href="{{ url_for('info_post')}}">Account Info</a>
     <a class="nav-link" href="{{ url_for('signin_post')}}">Sign Out</a>
   </div>
@@ -16,7 +16,7 @@
 
 <body>
     <div class="hero">
-      <center><h1 class = "herotxt">Browse the Inventory</h1></center>
+      <center><span  class = "herotxt">Browse the Inventory</span></center>
     </div>
 
     {% block content %}
@@ -150,11 +150,14 @@ span.right {
   background-size: cover;
   position: relative;
   color: white;
+  margin-top: 20px;
   
 }
 .herotxt
 {
-  -webkit-text-stroke: .5px #000000;
+  font-size: 60px;
+    -webkit-text-stroke: 2px #000000;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .res
 {
