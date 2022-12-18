@@ -1,10 +1,11 @@
-<!DOCTYPE html>   
-<html>   
-<head>  
-<meta name="viewport" content="width=device-width, initial-scale=1">  
-<title> Library </title>
-<script  src="invscript.js" ></script>
-<div class="topnav">
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Library </title>
+  <script src="invscript.js"></script>
+  <div class="topnav">
     <a class="active" href="#home"></a>
     <a href="#help">Get Help</a>
     <a class="nav-link" href="{{ url_for('search_post')}}">Search</a>
@@ -14,160 +15,186 @@
 </head>
 
 <body>
-    <div class="hero">
-      <center><h1 class = "herotxt">Browse the Inventory</h1></center>
-    </div>
+  <div class="hero">
+    <center>
+      <h1 class="herotxt">Browse the Inventory</h1>
+    </center>
+  </div>
 
-    {% block content %}
-      <table id="data" class="table table-striped">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>ISBN</th>
-            <th>Author</th>
-            <th>Reserved</th>
-            <th>publisher</th>
-            <th>release date</th>
-            <th>reserve book</th>
-            <th>return book</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for book in books %}
-            <tr>
-              <td>{{ book.bookTitle }}</td>
-              <td>{{ book.ISBN }}</td>
-              <td>{{ book.bookAuthor }}</td>
-              <td>{{ book.booksAvailable }}</td>
-              <td>{{ book.publisher }}</td>
-              <td>{{ book.releaseDate }}</td>
-              <td><form action="{{ url_for('reservebook_post')}}" method="POST"><button
-                name="title" type="submit"
-                value="{{book.bookTitle}}">Reserve</button></form></td>
-              <td><form action="{{ url_for('returnbook_post')}}" method="POST"><button
-                name="title" type="submit"
-                value="{{book.bookTitle}}">Return</button></form></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% endblock %}
+  {% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>ISBN</th>
+        <th>Author</th>
+        <th>Reserved</th>
+        <th>Publisher</th>
+        <th>Release Date</th>
+        <th>Reserve Book</th>
+        <th>Return Book</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+      <tr>
+        <td>{{ book.bookTitle }}</td>
+        <td>{{ book.ISBN }}</td>
+        <td>{{ book.bookAuthor }}</td>
+        <td>{{ book.booksAvailable }}</td>
+        <td>{{ book.publisher }}</td>
+        <td>{{ book.releaseDate }}</td>
+        <td>
+          <form action="{{ url_for('reservebook_post')}}" method="POST"><button name="title" type="submit"
+              value="{{book.bookTitle}}">Reserve</button></form>
+        </td>
+        <td>
+          <form action="{{ url_for('returnbook_post')}}" method="POST"><button name="title" type="submit"
+              value="{{book.bookTitle}}">Return</button></form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endblock %}
 </body>
+
 </html>
-<style>   
-data {
+<style>
+  data {
     width: 50%;
     font-size: 15px;
-}
+  }
 
-td {
+  td {
     width: 50%;
     border: 1px solid black;
     text-align: justify;
-}
+  }
 
-    td::after {
-        content: "";
-        display: inline-block;
-        width: 100%;
-    }
+  td::after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
 
-span.left {
-    float: left;
-}
-
-span.right {
-    float: right;
-}
   span.left {
-      float: left;
+    float: left;
   }
 
   span.right {
-      float: right;
+    float: right;
   }
-    body {
+
+  span.left {
+    float: left;
+  }
+
+  span.right {
+    float: right;
+  }
+
+  body {
     background-image: "library.jpg";
-    }  
-    button {   
-           background-color: #000000;   
-           width: 55%;  
-            color: rgb(253, 253, 253);   
-            padding: 15px;   
-            margin: 10px 0px;   
-            border: none;   
-            cursor: pointer;   
-             }   
-     input {
-        font-family: Georgia, serif; 
-        background-color: #ffffff;   
-        width: 55%;
-        padding: 15px;   
-        margin: 10px 0px;   
-        border: none;    
-        }   
-        body {
-        background: #ecf3f3;
-    }
-    .topnav{
-        font-family: Georgia, serif; 
-        background-color: rgb(95, 179, 190);
-        overflow: hidden;       
-    }
-    .topnav a {
-      float: left;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-    }
-    .topnav a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-    .topnav a.active {
-      background-color: rgb(95, 179, 190);
-      color: rgb(95, 179, 190);
-    }
+  }
 
-    .card {
-  background-color: #add4d6;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  
+  button {
+    background-color: #000000;
+    color: rgb(253, 253, 253);
+    padding: 15px;
+    margin: 10px 0px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  button:hover {
+    background-color: #555555;
+  }
+  button:active {
+  background-color: #555555;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
-.hero{
-  background-image: url("libhero.png");
-  height: 300px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  color: white;
-  
-}
-.herotxt
-{
-  -webkit-text-stroke: .5px #000000;
-}
-.res
-{
-  margin-top: 20px;
-}
-img{
-  margin-top: 10px;
-}
-table, th, td {
-  border:1px solid black;
-  margin-left: auto;
-  margin-right: auto;
-  width: auto;
+  input {
+    font-family: Georgia, serif;
+    background-color: #ffffff;
+    width: 55%;
+    padding: 15px;
+    margin: 10px 0px;
+    border: none;
+  }
 
-  text-align: center;
-}
+  body {
+    background: #ecf3f3;
+  }
+
+  .topnav {
+    font-family: Georgia, serif;
+    background-color: rgb(95, 179, 190);
+    overflow: hidden;
+  }
+
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .topnav a.active {
+    background-color: rgb(95, 179, 190);
+    color: rgb(95, 179, 190);
+  }
+
+  .card {
+    background-color: #add4d6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+  }
+
+  .hero {
+    background-image: url("libhero.png");
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: white;
+
+  }
+
+  .herotxt {
+    -webkit-text-stroke: .5px #000000;
+  }
+
+  .res {
+    margin-top: 20px;
+  }
+
+  img {
+    margin-top: 10px;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+
+    text-align: center;
+  }
 </style>
