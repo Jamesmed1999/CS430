@@ -126,6 +126,12 @@ def info_post():
     cur_user = User.query.filter_by(username=current_username).first()
     return render_template('userinfo.html', cur_user=cur_user)
 
+@app.route('/quote')
+def quote_post():
+    global current_username
+    cur_user = User.query.filter_by(username=current_username).first()
+    return render_template('quote.html', cur_user=cur_user)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5000, threaded=True)
