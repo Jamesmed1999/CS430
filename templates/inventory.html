@@ -59,6 +59,7 @@
 data {
     width: 50%;
     font-size: 15px;
+    
 }
 
 td {
@@ -91,14 +92,23 @@ span.right {
     background-image: "library.jpg";
     }  
     button {   
-           background-color: #000000;   
-           width: 55%;  
-            color: rgb(253, 253, 253);   
-            padding: 15px;   
-            margin: 10px 0px;   
-            border: none;   
-            cursor: pointer;   
-             }   
+      background-color: #000000;
+    color: rgb(253, 253, 253);
+    padding: 15px;
+    margin: 10px 0px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;   
+             }  
+             button:hover {
+    background-color: #555555;
+  }
+  button:active {
+  background-color: #555555;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+} 
+
      input {
         font-family: Georgia, serif; 
         background-color: #ffffff;   
@@ -151,6 +161,7 @@ span.right {
   position: relative;
   color: white;
   margin-top: 20px;
+  margin-bottom: 20px;
   
 }
 .herotxt
