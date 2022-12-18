@@ -8,23 +8,24 @@
   <a class="active" href="#home"></a>
   <a class="nav-link" href="{{ url_for('search_post')}}">Search</a>
   <a class="nav-link" href="{{ url_for('quote_post')}}">Quote Look Up</a>
-  <a class="nav-link" href="{{ url_for('inv_post')}}" >Request A Book</a>
+  <a class="nav-link" href="{{ url_for('inv_post')}}" >Book Inventory</a>
   <a class="nav-link" href="{{ url_for('info_post')}}">Account Info</a>
   <a class="nav-link" href="{{ url_for('signin_post')}}">Sign Out</a>
   </div>
 </head>
 
 {% block content %}
+<center><div class="acc">
     <span class="title">
-        <h1>{% block title %} Username: {{ cur_user.username }}{% endblock %}</h1>
+        <h1>{% block title %} Welcome back  {{ cur_user.username }}{% endblock %}</h1>
     </span>
     <div class="content">
             <div class="user">
-                <p>Password: {{ cur_user.password }}</p>
-                <p>Reserved: {{ cur_user.book }}</p>
-                <p>Thank you for using our Library App!</p>
+                <p class="p-1">Current Book: {{ cur_user.book }}</p>
+                <p class="p-1">Thank you for using our Library App!</p>
             </div>
     </div>
+  </div>
 {% endblock %}
 
 <style>   
@@ -103,6 +104,23 @@
 }
 img{
   margin-top: 10px;
+}
+.acc
+{
+    max-width: 1200px;
+    width:100%;
+    background-color: #ffffff;
+    margin-top:40px;
+    padding:25px 30px;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 1px 1px 10px 1px rgb(0, 0, 0);
+    
+    
+    
+}
+p{
+  font-size:  50px;
 }
 
 </style>

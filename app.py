@@ -58,6 +58,11 @@ def lib_post():
 def search_post():
     return render_template('lib.html')
 
+@app.route('/reg')
+def reg_post():
+    return render_template('signup.html')
+
+
 
 # This post swaps to the inventory page in the navbar
 @app.route('/inventory')
@@ -76,7 +81,7 @@ def signup_post():
         #Save password after hashing to encrypt
         _password = bcrypt.generate_password_hash(request.form.get("password"))
         current_username = _username
-
+        
         new_user = User(username=_username, password=_password, book="")
         db.session.add(new_user)
         db.session.commit()
