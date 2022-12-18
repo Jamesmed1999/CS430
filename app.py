@@ -59,6 +59,8 @@ def lib_post():
             if bcrypt.check_password_hash(user.password, _password):
                 # send the user to the library index.html page
                 return render_template('lib.html')
+            else:
+                return render_template('index.html')
 
 
 
