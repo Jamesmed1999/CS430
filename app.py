@@ -1,12 +1,12 @@
 import os
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from flask_bcrypt import Bcrypt
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_folder="")
-bcrypt = Bcrypt(app)
+
 global current_username
 
 '''
@@ -22,6 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] =\
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
 
 # By default, the flask app will load the index.html file in our /templates folder
 @app.route('/')
@@ -40,17 +41,11 @@ def lib_post():
         current_username = _username
 
         # check if the login exists, if not, create a new user
-        user = User.query.filter_by(username=_username).first()
-        if not user:
+        if not bool(User.query.filter_by(username=_username).first()):
             return render_template('signup.html')
         else:
-            #Compare hashed password to input
-            if bcrypt.check_password_hash(user.password, _password):
-                # send the user to the library index.html page
-                return render_template('lib.html')
-            else:
-                return render_template('index.html')
-
+            # send the user to the library index.html page
+            return render_template('lib.html')
 
 
 # This post is called by the inventory page to get back to lib.html
@@ -75,8 +70,7 @@ def signup_post():
     if request.method == "POST":
         global current_username
         _username = request.form.get("username")
-        #Save password after hashing to encrypt
-        _password = bcrypt.generate_password_hash(request.form.get("password"))
+        _password = request.form.get("password")
         current_username = _username
 
         new_user = User(username=_username, password=_password, book="")
@@ -150,7 +144,6 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
-
 
 # The User table for our database
 
