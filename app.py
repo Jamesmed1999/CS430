@@ -51,11 +51,10 @@ def lib_post():
 
         # check if the login exists, if not, create a new user
         user = User.query.filter_by(username=_username).first()
-        print("User: ", user.password)
-        print(_username)
         if not user:
             return render_template('signup.html')
         else:
+            #Compare hashed password to input
             if bcrypt.check_password_hash(user.password, _password):
                 # send the user to the library index.html page
                 return render_template('lib.html')
@@ -86,6 +85,7 @@ def signup_post():
     if request.method == "POST":
         global current_username
         _username = request.form.get("username")
+        #Save password after hashing to encrypt
         _password = bcrypt.generate_password_hash(request.form.get("password"))
         current_username = _username
 
