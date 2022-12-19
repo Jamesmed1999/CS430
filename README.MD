@@ -11,7 +11,7 @@ API Search TODO:
 * make it look nice
 
 HOW TO RUN THIS APPLICATION?
--check if Python and Flask is downloaded
--clone this repository
--pip install Flask-Bcrypt
--flask run
+* check if Python and Flask is downloaded
+* clone this repository
+* pip install Flask-Bcrypt
+* use command flask run in terminal (make sure you're in the correct directory)
