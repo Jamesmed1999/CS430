@@ -7,19 +7,18 @@
   <script src="invscript.js"></script>
   <div class="topnav">
     <a class="active" href="#home"></a>
-    <a href="#help">Get Help</a>
     <a class="nav-link" href="{{ url_for('search_post')}}">Search</a>
-    <a class="nav-link" href="{{ url_for('signin_post')}}">Sign Out</a>
+    <a class="nav-link" href="{{ url_for('quote_post')}}">Quote Look Up</a>
+    <a class="nav-link" href="{{ url_for('inv_post')}}" >Book Inventory</a>
     <a class="nav-link" href="{{ url_for('info_post')}}">Account Info</a>
+    <a class="nav-link" href="{{ url_for('signin_post')}}">Sign Out</a>
   </div>
 </head>
 
 <body>
-  <div class="hero">
-    <center>
-      <h1 class="herotxt">Browse the Inventory</h1>
-    </center>
-  </div>
+    <div class="hero">
+      <center><span  class = "herotxt">Browse the Inventory</span></center>
+    </div>
 
   {% block content %}
   <table id="data" class="table table-striped">
@@ -64,7 +63,8 @@
   data {
     width: 50%;
     font-size: 15px;
-  }
+    
+}
 
   td {
     width: 50%;
@@ -96,63 +96,57 @@
 
   body {
     background-image: "library.jpg";
-  }
-
-  button {
-    background-color: #000000;
+    }  
+    button {   
+      background-color: #000000;
     color: rgb(253, 253, 253);
     padding: 15px;
     margin: 10px 0px;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
-  }
-  button:hover {
+    border-radius: 4px;   
+             }  
+             button:hover {
     background-color: #555555;
   }
   button:active {
   background-color: #555555;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
-}
+} 
 
-  input {
-    font-family: Georgia, serif;
-    background-color: #ffffff;
-    width: 55%;
-    padding: 15px;
-    margin: 10px 0px;
-    border: none;
-  }
-
-  body {
-    background: #ecf3f3;
-  }
-
-  .topnav {
-    font-family: Georgia, serif;
-    background-color: rgb(95, 179, 190);
-    overflow: hidden;
-  }
-
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .topnav a.active {
-    background-color: rgb(95, 179, 190);
-    color: rgb(95, 179, 190);
-  }
+     input {
+        font-family: Georgia, serif; 
+        background-color: #ffffff;   
+        width: 55%;
+        padding: 15px;   
+        margin: 10px 0px;   
+        border: none;    
+        }   
+        body {
+        background: #ecf3f3;
+    }
+    .topnav{
+        font-family: Georgia, serif; 
+        background-color: rgb(95, 179, 190);
+        overflow: hidden;       
+    }
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    .topnav a.active {
+      background-color: rgb(95, 179, 190);
+      color: rgb(95, 179, 190);
+    }
 
   .card {
     background-color: #add4d6;
@@ -164,36 +158,36 @@
 
   }
 
-  .hero {
-    background-image: url("libhero.png");
-    height: 300px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    color: white;
-
-  }
-
-  .herotxt {
-    -webkit-text-stroke: .5px #000000;
-  }
-
-  .res {
-    margin-top: 20px;
-  }
-
-  img {
-    margin-top: 10px;
-  }
-
-  table,
-  th,
-  td {
-    border: 1px solid black;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
+.hero{
+  background-image: url("libhero.png");
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+}
+.herotxt
+{
+  font-size: 60px;
+    -webkit-text-stroke: 2px #000000;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.res
+{
+  margin-top: 20px;
+}
+img{
+  margin-top: 10px;
+}
+table, th, td {
+  border:1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
 
     text-align: center;
   }
